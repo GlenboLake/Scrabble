@@ -1,0 +1,26 @@
+1. Login screen
+2. "Choose your game" screen - so we can have multiple games with multiple people!
+3. Game screen:
+	- shows board
+	- shows rack
+	- shows move/point history
+	- chat window?
+	- "trade in tiles" button -- disabled if not your turn
+	- "submit your move" button -- disabled if not your turn
+4. How to make a move? Click and drag tiles off the rack onto the board, type onto the board, ability to choose?
+5. On "submit move":
+	- AJAX request to server:
+		- send the letters used and location of the letters? (compute score on server)
+		- send the word played and the score? (computed with javascript)
+		- send the player ID
+	- What happens on server:
+		- log the move and score
+		- remove relevant tiles from rack
+		- draw new tiles
+		- mark gamestate as being the next player's turn
+	- Response to client:
+		- new tiles
+		- total score?
+6. How to refresh the game board when the opponent plays?
+	- Keep track of connected clients and update all boards when a move is made?
+	- Have an auto-refresh every X minutes as well as a manual refresh button?
