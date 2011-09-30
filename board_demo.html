@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;">
+<canvas id="myCanvas" width="767" height="767" style="border:1px solid #c3c3c3;">
 	Your browser does not support the canvas element.
 </canvas>
 
@@ -10,10 +10,104 @@
 
 	var c=document.getElementById("myCanvas");
 	var cxt=c.getContext("2d");
+
+	/* First row */
 	cxt.fillStyle="#FF0000";
-	cxt.fillRect(0,0,150,75);
+	cxt.fillRect(1,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(53,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(104,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(155,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(206,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(257,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(308,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(359,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(410,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(461,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(512,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(563,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(614,1,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(665,1,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(716,1,50,50);
+
+	/* First Column */
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,53,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,104,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,155,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,206,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,257,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,308,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,359,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,410,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,461,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,512,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,563,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,614,50,50);
+
+	cxt.fillStyle="#FFFF00";
+	cxt.fillRect(1,665,50,50);
+
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(1,716,50,50);
 
 </script>
 
 </body>
 </html>
+
+
+<!-- 
+Will need 15 columns and 15 rows - an outlined canvas, 14 vertical lines, 14 horizontal lines.
+Let's say each box is nxn pixels, with a 1px border on all sides.
+Then I need a canvas that is (n*15)+16 pixels in each direction
+-->
