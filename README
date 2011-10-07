@@ -1,0 +1,7 @@
+Getting rails working (in theory)
+
+Commands that worked for Diane:
+sudo apt-get install ruby rubygems                          # Get ruby and the gems package manager
+sudo gem install rails --version 3.0.9                      # Install version 3.0.9 of rails
+sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev # Get essential dev packages for rails
+bundle install # Does this need sudo? Where does the bundle binary come from?
