@@ -1,8 +1,9 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
-require File.expand_path('board.rb', File.dirname(__FILE__))
-require File.expand_path('turn.rb', File.dirname(__FILE__))
+$LOAD_PATH << '.'
+
+require 'board'
 
 board = Board.new
 board.print
@@ -19,4 +20,5 @@ turn.add_letter(?l, 7, 11) #DLS
 turn.add_letter(?e, 7, 12)
 turn.remove_letter(1, 1)
 
-print(board.score_turn(turn))
+puts(board.play_turn(turn))
+board.print

@@ -1,7 +1,7 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
-require File.expand_path('turn.rb', File.dirname(__FILE__))
+require 'turn'
 
 $letter_scores = { ?A => 1, ?B => 3, ?C => 3, ?D => 2, ?E => 1,
   ?F => 4, ?G => 2, ?H => 4, ?I => 1, ?J => 8, ?K => 5, ?L => 1,
@@ -69,6 +69,14 @@ class Board
     @premiums[[11,14]] = :DLS
     @premiums[[14,3]] = :DLS
     @premiums[[14,11]] = :DLS
+  end
+
+  def play_turn(turn)
+    score = score_turn(turn)
+    unless score==0 #For valid plays only
+      turn.letters.each { |tile,letter| @squares[tile] = letter }
+    end
+    return score
   end
 
   def score_turn(turn)
