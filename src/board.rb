@@ -95,7 +95,7 @@ class Board
         word_multiplier *= 3
         word_score += $letter_scores[letter]
       elsif @premiums[tile]==:DLS
-        word_score += $letter_scores[letter] * 2
+        word_score += 2 * $letter_scores[letter]
       elsif @premiums[tile]==:TLS
         word_score += $letter_scores[letter] * 3
       else
@@ -124,15 +124,19 @@ class Board
   def print()
     for row in (0...15)
       for col in (0...15)
-#        case @premiums[[row,col]]
-#        when :TWS
-#          putc(?T)
-#        when :DWS
-#          putc(?D)
-#        when :TLS
-#          putc(?t)
-#        when :DLS
-#          putc(?d)
+#        if @squares[[row,col]]==blank
+#          case @premiums[[row,col]]
+#          when :TWS
+#            putc(?T)
+#          when :DWS
+#            putc(?D)
+#          when :TLS
+#            putc(?t)
+#          when :DLS
+#            putc(?d)
+#          else
+#            putc(blank)
+#          end
 #        else
           putc(@squares[[row,col]])
 #        end

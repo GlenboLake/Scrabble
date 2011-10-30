@@ -1,6 +1,8 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
+require 'ruby_version.rb'
+
 class Turn
   def initialize
     @letters = Hash.new
@@ -25,15 +27,26 @@ class Turn
   end
   
   def is_letter?(char)
-    unless char.is_a?(String)
-      puts(char.class.name)
-      return false
+    if RubyVersion.is? 1.8
+      unless char.is_a?(Fixnum)
+        return false
+      end
+      if char >= ?a && char <= ?z
+        char += ?A-?a
+        return true
+      end
     end
-    unless char.length == 1
-      puts("#{char.length}")
-      return false
+    if RubyVersion.is? 1.9
+      unless char.is_a?(String)
+        puts(char.class.name)
+        return false
+      end
+      unless char.length == 1
+        puts("#{char.length}")
+        return false
+      end
+      char.upcase!
     end
-    char.upcase!
     return char >= ?A && char <= ?Z
   end
 
