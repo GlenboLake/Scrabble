@@ -3,6 +3,8 @@
 
 require 'turn'
 
+$PRINT_PREMIUMS = false
+
 $letter_scores = { ?A => 1, ?B => 3, ?C => 3, ?D => 2, ?E => 1,
   ?F => 4, ?G => 2, ?H => 4, ?I => 1, ?J => 8, ?K => 5, ?L => 1,
   ?M => 3, ?N => 1, ?O => 1, ?P => 3, ?Q => 10, ?R => 1, ?S => 1,
@@ -73,9 +75,7 @@ class Board
 
   def play_turn(turn)
     score = score_turn(turn)
-    unless score==0 #For valid plays only
-      turn.letters.each { |tile,letter| @squares[tile] = letter }
-    end
+    turn.letters.each { |tile,letter| @squares[tile] = letter } unless score==0
     return score
   end
 
@@ -124,22 +124,22 @@ class Board
   def print()
     for row in (0...15)
       for col in (0...15)
-#        if @squares[[row,col]]==blank
-#          case @premiums[[row,col]]
-#          when :TWS
-#            putc(?T)
-#          when :DWS
-#            putc(?D)
-#          when :TLS
-#            putc(?t)
-#          when :DLS
-#            putc(?d)
-#          else
-#            putc(blank)
-#          end
-#        else
+        if $PRINT_PREMIUMS and @squares[[row,col]]==blank
+          case @premiums[[row,col]]
+          when :TWS
+            putc(?T)
+          when :DWS
+            putc(?D)
+          when :TLS
+            putc(?t)
+          when :DLS
+            putc(?d)
+          else
+            putc(blank)
+          end
+        else
           putc(@squares[[row,col]])
-#        end
+        end
       end
       putc(?\n)
     end
