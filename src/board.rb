@@ -108,16 +108,39 @@ class Board
   end
 
   def is_valid?(turn)
-    unless turn.is_a?(Turn)
+    return false if not turn.is_a?(Turn)
+    rows = []
+    cols = []
+    # First make sure the turn spans a single row or column and doesn't cover any occupied squares
+    turn.letters.keys.each { |key|
+      return false if @squares[key] != blank
+      rows << key[0]
+      cols << key[1]
+    }
+    if rows.uniq.size == 1
+      direction = :horizontal
+    elsif cols.uniq.size == 1
+      direction = :vertical
+    else
       return false
     end
-    turn.letters.keys.each { |key|
-      if @squares[key] != blank
-        return false
+    # Check to make sure there are tiles between each of the ones being placed
+    if direction == :horizontal
+      (cols.min..cols.max).each do |i|
+        cell = [rows[0],i]
+        if not (@squares[cell]==blank) ^ (turn.letters[cell]==blank)
+          return false
+        end
       end
-    }
-    # TODO: Check dictionaries (maybe) and intersecting words
-    return true
+    elsif direction == :vertical
+      (rows.min..rows.max).each { |i|
+        cell = [i, cols[0]]
+        if not (@squares[cell]==blank) ^ (turn.letters[cell]==nil)
+          return false
+        end
+      }
+    end
+    true
   end
   private :is_valid?
 
