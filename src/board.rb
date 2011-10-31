@@ -121,7 +121,7 @@ class Board
   end
   private :is_valid?
 
-  def print()
+  def printout()
     for row in (0...15)
       for col in (0...15)
         if $PRINT_PREMIUMS and @squares[[row,col]]==blank

@@ -32,7 +32,7 @@ if (turn_score > 0)
   players[current_player].turns << turn
   players[current_player].score += turn_score
 end
-board.print
+board.printout
 # Print the scores
 current_player = (current_player+1) % players.size
 players.each do |player|
@@ -51,7 +51,7 @@ if (turn_score > 0)
   players[current_player].turns << turn
   players[current_player].score += turn_score
 end
-board.print
+board.printout
 #Print the scores
 current_player = (current_player+1) % players.size
 players.each do |player|
@@ -72,7 +72,7 @@ if (turn_score > 0)
   players[current_player].turns << turn
   players[current_player].score += turn_score
 end
-board.print
+board.printout
 #Print the scores
 current_player = (current_player+1) % players.size
 players.each do |player|
