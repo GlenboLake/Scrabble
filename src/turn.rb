@@ -26,6 +26,23 @@ class Turn
     @letters.delete([row,col])
   end
   
+  def direction
+    rows = []
+    cols = []
+    # First make sure the turn spans a single row or column and doesn't cover any occupied squares
+    @letters.keys.each { |key|
+      rows << key[0]
+      cols << key[1]
+    }
+    if rows.uniq.size == 1
+      return :horizontal
+    elsif cols.uniq.size == 1
+      return :vertical
+    else
+      return nil
+    end
+  end
+
   def is_letter?(char)
     if RubyVersion.is? 1.8
       unless char.is_a?(Fixnum)
@@ -49,6 +66,5 @@ class Turn
     end
     return char >= ?A && char <= ?Z
   end
-
   private :is_letter?
 end

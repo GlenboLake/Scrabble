@@ -109,30 +109,21 @@ class Board
 
   def is_valid?(turn)
     return false if not turn.is_a?(Turn)
-    rows = []
-    cols = []
     # First make sure the turn spans a single row or column and doesn't cover any occupied squares
-    turn.letters.keys.each { |key|
-      return false if @squares[key] != blank
-      rows << key[0]
-      cols << key[1]
-    }
-    if rows.uniq.size == 1
-      direction = :horizontal
-    elsif cols.uniq.size == 1
-      direction = :vertical
-    else
-      return false
-    end
+    return false if turn.direction==nil
+    # collect the rows and columns
+    rows = turn.letters.keys.collect { |i| i[0] }.uniq
+    cols = turn.letters.keys.collect { |i| i[1] }.uniq
     # Check to make sure there are tiles between each of the ones being placed
-    if direction == :horizontal
+    case turn.direction
+    when :horizontal
       (cols.min..cols.max).each do |i|
         cell = [rows[0],i]
         if not (@squares[cell]==blank) ^ (turn.letters[cell]==blank)
           return false
         end
       end
-    elsif direction == :vertical
+    when :vertical
       (rows.min..rows.max).each { |i|
         cell = [i, cols[0]]
         if not (@squares[cell]==blank) ^ (turn.letters[cell]==nil)
