@@ -168,7 +168,7 @@ class Board
         turn_score += score_word(turn.letters, (left..right).to_a.collect { |row| [row, col] })
       end
     end
-    turn_score
+    turn.score = turn_score
   end
 
   def is_valid?(turn)

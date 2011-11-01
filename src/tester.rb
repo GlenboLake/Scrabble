@@ -23,11 +23,10 @@ turn.add_letter(?E, 7, 11)
 turn.remove_letter(1, 1)
 
 # Play the turn
-turn_score = board.play_turn(turn)
-if (turn_score > 0)
-  puts("#{players[current_player].name} scored #{turn_score} points!")
-  players[current_player].turns << turn
-  players[current_player].score += turn_score
+board.play_turn(turn)
+if (turn.score > 0)
+  puts("#{players[current_player].name} scored #{turn.score} points!")
+  players[current_player].score += turn.score
 end
 board.printout
 # Print the scores
@@ -40,11 +39,10 @@ turn.add_letter(?S, 7, 4) # DWS
 turn.add_letter(?C, 7, 5)
 
 # Play the turn
-turn_score = board.play_turn(turn)
-if (turn_score > 0)
-  puts("#{players[current_player].name} scored #{turn_score} points!")
-  players[current_player].turns << turn
-  players[current_player].score += turn_score
+board.play_turn(turn)
+if (turn.score > 0)
+  puts("#{players[current_player].name} scored #{turn.score} points!")
+  players[current_player].score += turn.score
 end
 board.printout
 #Print the scores
@@ -59,11 +57,10 @@ turn.add_letter(?K, 8, 5)
 turn.add_letter(?S, 9, 5)
 
 # Play the turn
-turn_score = board.play_turn(turn)
-if (turn_score > 0)
-  puts("#{players[current_player].name} scored #{turn_score} points!")
-  players[current_player].turns << turn
-  players[current_player].score += turn_score
+board.play_turn(turn)
+if (turn.score > 0)
+  puts("#{players[current_player].name} scored #{turn.score} points!")
+  players[current_player].score += turn.score
 end
 board.printout
 #Print the scores

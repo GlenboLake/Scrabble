@@ -1,11 +1,13 @@
 require 'ruby_version.rb'
 
 class Turn
+  attr_reader :letters
+  attr_accessor :score
+
   def initialize
     @letters = Hash.new
+    @score = 0
   end
-
-  attr_reader :letters
 
   def add_letter(letter, row, col)
     unless is_letter?(letter)
