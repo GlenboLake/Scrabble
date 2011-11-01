@@ -79,31 +79,95 @@ class Board
     return score
   end
 
+  def score_word(letters, tiles)
+    # letters is the letter collection from the turn
+    # tiles are the indexes in [row,col] form
+    return 0 if tiles.size==1
+    word_score = 0
+    word_multiplier = 1
+    tiles.each { |tile|
+      if letters[tile] == nil
+        # This tile is already on the board
+        word_score += $letter_scores[@squares[tile]]
+      else
+        # This is part of the word that was just played
+        case @premiums[tile]
+        when :DWS
+          word_multiplier *= 2
+          word_score += $letter_scores[letters[tile]]
+        when :TWS
+          word_multiplier *= 3
+          word_score += $letter_scores[letters[tile]]
+        when :DLS
+          word_score += 2 * $letter_scores[letters[tile]]
+        when :TLS
+          word_score += 3 * $letter_scores[letters[tile]]
+        else
+          word_score += $letter_scores[letters[tile]]
+        end
+      end
+    }
+    word_score * word_multiplier
+  end
+  private :score_word
+
   def score_turn(turn)
     unless is_valid?(turn)
       return 0
     end
     turn_score = 0
-    #for each word (including crosses)
-      word_score = 0
-      word_multiplier = 1
-      turn.letters.each { |tile,letter|
-      if @premiums[tile]==:DWS
-        word_multiplier *= 2
-        word_score += $letter_scores[letter]
-      elsif @premiums[tile]==:TWS
-        word_multiplier *= 3
-        word_score += $letter_scores[letter]
-      elsif @premiums[tile]==:DLS
-        word_score += 2 * $letter_scores[letter]
-      elsif @premiums[tile]==:TLS
-        word_score += $letter_scores[letter] * 3
-      else
-        word_score += $letter_scores[letter]
+    # First, primary word
+    case turn.direction
+    when :horizontal
+      row = turn.letters.keys.first[0]
+      left = turn.letters.keys.first[1]
+      right = turn.letters.keys.last[1]
+      until turn.letters[[row, left-1]]==nil and @squares[[row, left-1]]==blank
+        left -= 1
       end
-      }
-      turn_score += word_score * word_multiplier
-    #end
+      until turn.letters[[row, right+1]]==nil and @squares[[row, right+1]]==blank
+        right += 1
+      end
+      turn_score += score_word(turn.letters, (left..right).to_a.collect { |col| [row, col] })
+    when :vertical
+      col = turn.letters.keys.first[1]
+      top = turn.letters.keys.first[0]
+      bot = turn.letters.keys.last[1]
+      until turn.letters[[top-1, col]]==nil and @squares[[top-1, col]]==blank
+        top -= 1
+      end
+      until turn.letters[[bot+1, col]]==nil and @squares[[bot+1, col]]==blank
+        bot += 1
+      end
+      turn_score += score_word(turn.letters, (top..bot).to_a.collect { |row| [row, col] })
+    end
+    # for each cross words
+    turn.letters.keys.each do |key|
+      row = key[0]
+      col = key[1]
+      case turn.direction
+      when :horizontal
+        top = row
+        until turn.letters[[top-1, col]]==nil and @squares[[top-1, col]]==blank
+          top -= 1
+        end
+        bot = row
+        until turn.letters[[bot+1, col]]==nil and @squares[[bot+1, col]]==blank
+          bot += 1
+        end
+        turn_score += score_word(turn.letters, (top..bot).to_a.collect { |row| [row, col] })
+      when :vertical
+        left = col
+        until turn.letters[[row, left-1]]==nil and @squares[[row, left-1]]==blank
+          left -= 1
+        end
+        right = col
+        until turn.letters[[row, right+1]]==nil and @squares[[row, right+1]]=blank
+          right += 1
+        end
+        turn_score += score_word(turn.letters, (left..right).to_a.collect { |row| [row, col] })
+      end
+    end
     turn_score
   end
 
