@@ -15,6 +15,8 @@ class Board
     ?_
   end
 
+  attr_accessor :squares, :premiums
+  
   def initialize
     @squares = Hash.new
     (0...15).each do |i|
